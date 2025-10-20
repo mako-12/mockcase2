@@ -36,9 +36,31 @@ class User extends Authenticatable
     /**
      * The attributes that should be cast.
      *
-     * @var array<string, string>
+     * @var array<string, string>s
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public const ROLE_GENERAL = 0;
+    public const ROLE_ADMIN = 1;
+
+    public function getRoleNameAttribute(): string
+    {
+        return match ($this->role) {
+            self::ROLE_GENERAL => '一般ユーザー',
+            self::ROLE_ADMIN => '管理者',
+            default => '不明',
+        };
+    }
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
+    public function attendanceRequests()
+    {
+        return $this->hasMany(AttendanceRequest::class);
+    }
 }

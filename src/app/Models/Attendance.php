@@ -24,6 +24,13 @@ class Attendance extends Model
         'status',
     ];
 
+    protected $casts = [
+        'work_date' => 'date',
+        'start_time' => 'datetime',
+        'end_time' => 'datetime',
+    ];
+
+
     public function getStatusNameAttribute(): string
     {
         return match ($this->status) {
@@ -47,7 +54,7 @@ class Attendance extends Model
 
     public function attendanceRequests()
     {
-        return $this->hasMany(AttendanceRequest::class);
+        return $this->hasMany(AttendanceRequest::class, 'attendance_id');
     }
 
 

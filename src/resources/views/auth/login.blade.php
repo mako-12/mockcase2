@@ -12,6 +12,13 @@
     <form action="/login" method="post" class="center">
         @csrf
         <h1 class="page__title">ログイン</h1>
+
+        @if (session('error'))
+            <div class="form__error">
+                {{ session('error') }}
+            </div>
+        @endif
+
         <label for="mail" class="entry__name">メールアドレス</label>
         <input type="email" name="email" id="mail" class="input" value="{{ old('email') }}">
         <div class="form__error">

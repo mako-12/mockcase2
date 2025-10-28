@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\AttendanceController as AdminAttendanceController;
 use App\Http\Controllers\General\AttendanceController as GeneralAttendanceController;
+use App\Http\Controllers\General\AttendanceRequestController as GeneralAttendanceRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,14 @@ Route::prefix('admin')->middleware(['auth:admin', 'can:isAdmin'])->group(functio
 //一般ユーザーページ
 Route::middleware(['auth'])->group(function () {
     Route::get('/attendance', [GeneralAttendanceController::class, 'index'])->name('general.attendance');
-    Route::post('/attendance',[GeneralAttendanceController::class,'updateStatus'])->name('attendance.update');
-    Route::get('/attendance/list',[GeneralAttendanceController::class,'showList'])->name('attendance.list');
+    Route::post('/attendance', [GeneralAttendanceController::class, 'updateStatus'])->name('attendance.update');
+    Route::get('/attendance/list', [GeneralAttendanceController::class, 'showList'])->name('attendance.list');
 
+    //勤怠詳細画面
+    Route::get('/attendance/detail/{id}', [GeneralAttendanceController::class, 'showDetail'])->name('attendance.detail');
+    Route::post('/attendance/request/{id}', [GeneralAttendanceController::class, 'submitRequest'])->name('attendance.request.submit');
+
+
+    //申請一覧画面
+    Route::get('/request_list', [GeneralAttendanceRequestController::class, 'index'])->name('attendance.request');
 });

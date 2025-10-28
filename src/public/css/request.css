@@ -1,0 +1,20 @@
+input[type="radio"]{
+    display: none;
+}
+
+.tab__panel{
+    display: none;
+}
+
+#pending-approval:checked~.tab label[for="pending-approval"],
+#approved:checked~.tab label[for="approved"]{
+    font-weight: bold;
+}
+
+#pending-approval:checked~.tab__page #panel-pending-approval{
+    display: block;
+}
+
+#approved:checked~.tab__page #panel-approved{
+    display: block;
+}

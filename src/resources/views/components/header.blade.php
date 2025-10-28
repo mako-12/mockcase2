@@ -9,11 +9,13 @@
                 <nav class='header__nav'>
                     <ul>
                         <li><a href="{{ route('attendance.list') }}">今月の出勤一覧</a></li>
-                        <li><a href="">申請一覧<a></li>
-                        <form action="/logout" method="post">
-                            @csrf
-                            <button class="header__logout">ログアウト</button>
-                        </form>
+                        <li><a href="{{ route('attendance.request') }}">申請一覧</a></li>
+                        <li>
+                            <form action="/logout" method="post">
+                                @csrf
+                                <button class="header__logout">ログアウト</button>
+                            </form>
+                        </li>
                     </ul>
                 </nav>
             @else
@@ -24,10 +26,12 @@
                     <ul>
                         <li><a href="{{ route('general.attendance') }}">勤怠</a></li>
                         <li><a href="{{ route('attendance.list') }}">勤怠一覧</a></li>
-                        <li><a href="">申請</a></li>
-                        <form action="/logout" method="post">
-                            @csrf
-                            <button class="header__logout">ログアウト</button>
+                        <li><a href="{{ route('attendance.request') }}">申請</a></li>
+                        <li>
+                            <form action="/logout" method="post">
+                                @csrf
+                                <button class="header__logout">ログアウト</button>
+                        </li>
                         </form>
                     </ul>
                 </nav>

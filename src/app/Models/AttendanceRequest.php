@@ -16,10 +16,15 @@ class AttendanceRequest extends Model
         'user_id',
         'attendance_id',
         'request_date',
-        'request_start_time',
-        'request_end_time',
+        'requested_start_time',
+        'requested_end_time',
         'reason',
         'status',
+    ];
+
+    protected $casts = [
+        'requested_start_time' => 'datetime',
+        'requested_end_time' => 'datetime',
     ];
 
     public function getStatusNameAttribute(): string
@@ -39,5 +44,10 @@ class AttendanceRequest extends Model
     public function attendance()
     {
         return $this->belongsTo(Attendance::class);
+    }
+
+    public function breakRequests()
+    {
+        return $this->hasMany(BreakRequest::class);
     }
 }

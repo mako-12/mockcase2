@@ -21,6 +21,7 @@ class Attendance extends Model
         'start_time',
         'end_time',
         'total_work_time',
+        'admin_note',
         'status',
     ];
 

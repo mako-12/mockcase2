@@ -31,11 +31,37 @@
                     <td class="request__label">詳細</td>
                 </tr>
 
-                <tr class="request__row">
-                    <td class="request__date">
-                        
-                    </td>
-                </tr>
+                @foreach ($attendanceRequests as $attendanceRequest)
+                    @if (isset($attendanceRequest->status) && $attendanceRequest->status == 0)
+                        <tr class="request__row">
+                            <td class="request__date">
+                                {{-- 状態 --}}
+                                {{ $attendanceRequest->status_name }}
+                            </td>
+                            {{-- 名前 --}}
+                            <td class="request_date">
+                                {{ $attendanceRequest->user->name }}
+                            </td>
+                            {{-- 対象日時 --}}
+                            <td class="request_date">
+                                {{ $attendanceRequest->attendance->work_date->format('Y/m/d') }}
+                            </td>
+                            {{-- 対象日時 --}}
+                            <td class="request_date">
+                                {{ $attendanceRequest->reason }}
+                            </td>
+                            {{-- 申請日時 --}}
+                            <td class="request_date">
+                                {{ $attendanceRequest->request_date->format('Y/m/d') }}
+                            </td>
+                            {{-- 詳細 --}}
+                            <td class="request_date">
+                                <a href="{{ route('attendance.detail', ['id' => $attendanceRequest->attendance->id]) }}"
+                                    class="">詳細</a>
+                            </td>
+                        </tr>
+                    @endif
+                @endforeach
             </table>
         </div>
 

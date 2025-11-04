@@ -20,6 +20,7 @@ class CreateAttendancesTable extends Migration
             $table->dateTime('start_time')->nullable();
             $table->dateTime('end_time')->nullable();
             $table->integer('total_work_time')->nullable();
+            $table->string('admin_note')->nullable()->comment('管理者による修正理由');
             $table->tinyInteger('status')->comment('0:勤務外,1:出勤中,2:休憩中,3:退勤済み');
             $table->timestamps();
         });

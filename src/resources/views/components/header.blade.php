@@ -9,7 +9,7 @@
                 <nav class='header__nav'>
                     <ul>
                         <li><a href="{{ route('attendance.list') }}">今月の出勤一覧</a></li>
-                        <li><a href="{{ route('attendance.request') }}">申請一覧</a></li>
+                        <li><a href="{{ route('general.attendance.request') }}">申請一覧</a></li>
                         <li>
                             <form action="/logout" method="post">
                                 @csrf
@@ -26,7 +26,7 @@
                     <ul>
                         <li><a href="{{ route('general.attendance') }}">勤怠</a></li>
                         <li><a href="{{ route('attendance.list') }}">勤怠一覧</a></li>
-                        <li><a href="{{ route('attendance.request') }}">申請</a></li>
+                        <li><a href="{{ route('general.attendance.request') }}">申請</a></li>
                         <li>
                             <form action="/logout" method="post">
                                 @csrf
@@ -43,9 +43,9 @@
             </div>
             <nav class="header__nav">
                 <ul>
-                    <li><a href="">勤怠一覧</a></li>
-                    <li><a href="">スタッフ一覧</a></li>
-                    <li><a href="">申請一覧</a></li>
+                    <li><a href="{{ route('admin.attendance.list') }}">勤怠一覧</a></li>
+                    <li><a href="{{ route('admin.staff.list') }}">スタッフ一覧</a></li>
+                    <li><a href="{{ route('admin.attendance.request') }}">申請一覧</a></li>
                     <li>
                         <form action="/admin/logout" method="post">
                             @csrf

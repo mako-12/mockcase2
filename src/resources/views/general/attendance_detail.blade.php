@@ -54,9 +54,6 @@
             <tr class="detail__row">
                 <th class="detail__label">出勤・退勤</th>
                 <td class="detail__data">
-                    {{-- <input type="time" class="detail__input" name="start_time"
-                        value="{{ old('start_time', $attendance->start_time ? $attendance->start_time->format('H:i') : '') }}"
-                        {{ $pendingRequest ? 'disabled' : '' }} required> --}}
                     <input type="time" class="detail__input" name="start_time"
                         value="{{ $pendingRequest && $pendingRequest->requested_start_time
                             ? $pendingRequest->requested_start_time->format('H:i')
@@ -65,10 +62,6 @@
                                 : '') }}"
                         {{ $pendingRequest ? 'disabled' : '' }} required>
                     <span class="detail__separator">～</span>
-                    {{-- <input type="time" class="detail__input" name="end_time"
-                        value="{{ old('end_time', $attendance->end_time ? $attendance->end_time->format('H:i') : '') }}"
-                        {{ $pendingRequest ? 'disabled' : '' }} required> --}}
-
                     <input type="time" class="detail__input" name="end_time"
                         value="{{ $pendingRequest && $pendingRequest->requested_end_time
                             ? $pendingRequest->requested_end_time->format('H:i')
@@ -102,8 +95,9 @@
                         $breakEnd = $breakTime->break_end->format('H:i');
                     }
                 @endphp
+
                 <tr class="detail__row">
-                    <th class="detail__label">休憩</th>
+                    <th class="detail__label">{{ $index === 0 ? '休憩' : '休憩' . ($index + 1) }}</th>
                     <td class="detail__data">
                         <input type="time" class="detail__input" name="break_start[]" value="{{ $breakStart }}"
                             {{ $pendingRequest ? 'disabled' : '' }}>
@@ -124,7 +118,11 @@
             @if ($newBreaks->isNotEmpty())
                 @foreach ($newBreaks as $index => $newBreak)
                     <tr class="detail__row">
-                        <th class="detail__label">休憩{{ count($attendance->breakTimes) + 1 }}</th>
+                        <th class="detail__label">
+                            {{ count($attendance->breakTimes) === 0 && $index === 0
+                                ? '休憩'
+                                : '休憩' . (count($attendance->breakTimes) + 1) }}
+                        </th>
                         <td class="detail_data">
                             <input type="time" class="detail__input" name="break_start[]"
                                 value="{{ $newBreak->requested_break_start ? $newBreak->requested_break_start->format('H:i') : '' }}"
@@ -137,6 +135,8 @@
                     </tr>
                 @endforeach
             @endif
+
+
             {{-- 空の追加欄 --}}
             @if (!$pendingRequest)
                 <tr class="detail__row">
@@ -149,20 +149,6 @@
                 </tr>
             @endif
 
-
-
-
-            {{-- <tr class="detail__row">
-                <th class="detail__label">休憩{{ count($attendance->breakTimes) + 1 }}</th>
-                <td class="detail_data">
-                    <input type="time" class="detail__input" name="break_start[]"
-                        {{ $pendingRequest ? 'disabled' : '' }}>
-                    <span class="detail__separator">〜</span>
-                    <input type="time" class="detail__input" name="break_end[]" {{ $pendingRequest ? 'disabled' : '' }}>
-                </td>
-            </tr> --}}
-
-
             <tr class="detail__row">
                 <th class="detail__label">備考</th>
                 <td class="detail__data">
@@ -174,7 +160,9 @@
             @if ($pendingRequest)
                 <p class="detail__pending-message">*承認待ちのため修正はできません。</p>
             @else
+                    <div class="detail__submit">
                 <button class="detail__submit-btn">修正</button>
+                    </div>
             @endif
         </div>
     </form>

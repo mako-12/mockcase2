@@ -72,7 +72,7 @@ class AttendanceController extends Controller
                 if ($attendance) {
                     $attendance->update(['status' => Attendance::STATUS_WORKING]);
 
-                    $attendance->breaks()->latest()->first()->update([
+                    $attendance->breakTimes()->latest()->first()->update([
                         'break_end' => $now,
                     ]);
                 }

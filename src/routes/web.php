@@ -29,7 +29,15 @@ Route::prefix('admin')->group(function () {
 //管理者用ページ
 Route::prefix('admin')->middleware(['auth:admin', 'can:isAdmin'])->group(function () {
     Route::get('/attendance/list', [AdminAttendanceController::class, 'index'])->name('admin.attendance.list');
+    //スタッフリスト
+    Route::get('/staff/list', [AdminAttendanceController::class, 'showStaffList'])->name('admin.staff.list');
+    // スタッフ別月次勤怠
+    Route::get('/attendance/staff/{id}',[AdminAttendanceController::class,'showStaffAttendance'])->name('admin.staff.attendance');
+    Route::get('/attendance/{id}', [AdminAttendanceController::class, 'showDetail'])->name('admin.attendance.detail');
+    Route::post('/attendance{id}', [AdminAttendanceController::class, 'updateAttendance'])->name('admin.attendance.update');
 });
+
+Route::get('/stamp_correction_request/list', [AdminAttendanceController::class, 'showRequest'])->name('admin.attendance.request');
 
 // 一般ユーザー
 // Route::prefix('general')->middleware(['auth'])->group(function () {
@@ -48,5 +56,5 @@ Route::middleware(['auth'])->group(function () {
 
 
     //申請一覧画面
-    Route::get('/request_list', [GeneralAttendanceRequestController::class, 'index'])->name('attendance.request');
+    Route::get('/request_list', [GeneralAttendanceRequestController::class, 'index'])->name('general.attendance.request');
 });

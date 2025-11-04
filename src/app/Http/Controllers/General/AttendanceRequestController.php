@@ -13,12 +13,11 @@ class AttendanceRequestController extends Controller
     public function index()
     {
         $user = Auth::user();
-
-        $requestData = AttendanceRequest::with('breakRequests')
+        $attendanceRequests = AttendanceRequest::with('user', 'attendance')
             ->where('user_id', $user->id)
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->get();
 
-        return view('general.request_list');
+
+        return view('general.request_list', compact('attendanceRequests'));
     }
 }

@@ -7,6 +7,13 @@
 
     @include('components.header')
 
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+
     <form action="/admin/login" method="post" class="authenticate center">
         @csrf
         <hi class="page_title">管理者ログイン</hi>

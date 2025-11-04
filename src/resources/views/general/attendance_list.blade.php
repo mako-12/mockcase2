@@ -9,15 +9,15 @@
     <div class="page__header">
         <h2>勤怠一覧</h2>
     </div>
-    <div class="month__nav">
+    <div class="month-nav">
         <a href="{{ route('attendance.list', ['month' => \Carbon\Carbon::parse($month)->subMonth()->format('Y-m')]) }}"
-            class="month_nav__prev"><span class="arrow">←</span>
+            class="month-nav__prev"><span class="arrow">←</span>
             前月</a>
-        <div class="month__nav--center">
-            <span class="month_nav__current">{{ \Carbon\Carbon::parse($month)->format('Y/m') }}</span>
+        <div class="month-nav--center">
+            <span class="month-nav__current">{{ \Carbon\Carbon::parse($month)->format('Y/m') }}</span>
         </div>
         <a href="{{ route('attendance.list', ['month' => \Carbon\Carbon::parse($month)->addMonth()->format('Y-m')]) }}"
-            class="month__nav__next"><span class="arrow">→</span>
+            class="mont-nav__next"><span class="arrow">→</span>
             翌月</a>
     </div>
 

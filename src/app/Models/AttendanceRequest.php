@@ -25,6 +25,7 @@ class AttendanceRequest extends Model
     protected $casts = [
         'requested_start_time' => 'datetime',
         'requested_end_time' => 'datetime',
+        'request_date' => 'datetime',
     ];
 
     public function getStatusNameAttribute(): string

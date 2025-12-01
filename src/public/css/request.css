@@ -18,3 +18,63 @@ input[type="radio"]{
 #approved:checked~.tab__page #panel-approved{
     display: block;
 }
+
+.page__header{
+    font-size: 30px;
+    margin: 20px auto;
+    border-left: 8px solid #000;
+    padding: 5px 0 5px 20px;
+}
+
+.tab{
+    border-bottom: 1px solid black;
+}
+
+label {
+    display: inline-block;
+    margin-top: 40px;
+    font-size: 16px;
+    margin-left: 50px;
+
+}
+
+label:last-child{
+margin-left: 100px;
+}
+
+.request__table{
+    table-layout: fixed;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: white;
+    margin: 40px auto;
+    padding: 30px auto;
+    border-radius: 10px;
+    color: gray;
+    font-weight: bold;
+}
+
+.request__th{
+    width: 100%;
+}
+.request__row{
+    height: 40px;
+}
+
+.request__row:not(:last-child){
+    border-bottom: 1px solid rgb(172, 172, 172);
+}
+
+.request__label{
+    padding-top: 10px;
+    padding-right: 20px;
+    border-bottom: 2px solid rgb(172, 172, 172);
+}
+.request__data{
+    padding: 20px 0;
+    padding-right: 20px;
+
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}

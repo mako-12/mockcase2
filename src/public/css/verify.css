@@ -1,0 +1,28 @@
+.verify-page__message{
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 150px;
+    line-height: 25px;
+}
+
+.verify-page__btn{
+    text-align: center;
+    margin-top: 80px;
+}
+
+.verify__btn{
+    padding: 10px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: rgb(207, 207, 207);
+}
+
+.verify-email__btn{
+    color: rgb(57, 142, 240);
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+}

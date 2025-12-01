@@ -2,13 +2,28 @@
     box-sizing: border-box;
 }
 
+
 body{
     width: 100vw;
+    height: 100vh;
     background-color:#F0EFF2;
+    margin: 0 auto;
 }
 
-img{
-    width: 100%;
+body.login-page,
+body.register-page {
+  background-color: #fff !important;
+}
+
+
+input{
+    width: 50vw;
+    width: 800px;
+    height: 40px;
+    font-size: 20px;
+    padding-left: 10px;
+    /* align-items: center; */
+    /* text-align: center; */
 }
 
 
@@ -26,16 +41,19 @@ header{
 
 }
 
-.header__logo{
-    width: 250px;
+.header__logo img{
+    width: 300px;
     height: fit-content;
     vertical-align: middle;
+    margin-right: 20px;
+
 }
 
 .header__nav{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    white-space: nowrap;
 
 }
 .header__nav ul{
@@ -65,8 +83,72 @@ header{
     font-weight: bold;
 }
 
+.inner{
+    /* width: 60vw; */
+    width: 800px;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    padding: 50px 0;
+}
+
+
+label{
+    display: block;
+    font-size: 20px;
+    margin-top: 50px;
+    padding-bottom: 10px;
+    text-align: left;
+}
+
+.page__title{
+    font-size: 26px;
+    font-weight: bold;
+    margin: 40px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.entry__name{
+    font-weight: bold;
+    /* text-align: left; */
+    width: 800px;
+
+}
+
+.page__item{
+    text-align: center;
+}
+.btn--big{
+    width: 800px;
+    height: 45px;
+    margin-top: 70px;
+    background-color: black;
+    color: white;
+    border: black;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+.disable a ,span{
+    color: black
+}
+
+.error-message{
+    display: block;
+    color: rgb(240, 76, 76);
+    text-align: left;
+}
+
 @media (min-width: 768px) and (max-width: 850px) {
     .header__logo {
-        width: 25vw;
+        width: 20vw;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use App\Models\User;
+use Carbon\CarbonPeriod;
 use App\Models\BreakTime;
 use App\Models\Attendance;
 use App\Models\BreakRequest;
@@ -45,22 +46,45 @@ class AttendanceController extends Controller
     // スタッフ別月次勤怠
     public function showStaffAttendance(Request $request, $id)
     {
-        $attendances = Attendance::with(['user', 'breakTimes'])
-            ->findOrFail($id);
-
         $month = $request->input('month', Carbon::now()->format('Y-m'));
+        $user = User::findOrFail($id);
+
+        $startOfMonth = Carbon::parse($month)->startOfMonth();
+        $endOfMonth = Carbon::parse($month)->endOfMonth();
 
 
 
-        return view('admin/staff_attendance_list', compact('attendances'));
+        $attendanceDate = Attendance::with(['breakTimes'])
+            ->where('user_id', $id)
+            // ->whereMonth('work_date', Carbon::parse($month)->month)
+            // ->whereYear('work_date', Carbon::parse($month)->year)
+            ->whereBetween('work_date', [$startOfMonth, $endOfMonth])
+            ->get()
+            ->keyBy(function ($item) {
+                return $item->work_date->format('Y-m-d');  // ← これで日付だけをキーにする
+            });
+
+        $period = CarbonPeriod::create($startOfMonth, $endOfMonth);
+
+        $attendances = collect($period)->map(function ($date) use ($attendanceDate) {
+            $dateString = $date->format('Y-m-d');
+            return $attendanceDate->get($dateString)
+                ?? $this->createEmptyAttendance($dateString);
+        });
+
+        return view('admin/staff_attendance_list', compact('attendances', 'month', 'user'));
     }
 
-
-
-
-    public function showRequest()
+    private function createEmptyAttendance($dateString)
     {
-        return view('admin/request_list');
+        return (object)[
+            'work_date' => $dateString,
+            'start_time' => null,
+            'end_time' => null,
+            'breakTimes' => collect(),  // 空のコレクション
+            'break_duration' => 0,
+            'work_duration' => 0,
+        ];
     }
 
 

@@ -17,6 +17,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
+            'id' => 1,
             'name' => '管理者',
             'email' => 'admin@example.com',
             'password' => Hash::make('password'),
@@ -25,7 +26,8 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => '田中一郎',
+            'id' => 2,
+            'name' => '田中　一郎',
             'email' => 'itiro@example.com',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('password'),
@@ -33,7 +35,8 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => '佐藤一花',
+            'id' => 3,
+            'name' => '佐藤　一花',
             'email' => 'ichika@example.com',
             'password' => Hash::make('password'),
             'email_verified_at' => Carbon::now(),
@@ -41,8 +44,17 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => '木村一颯',
+            'id' => 4,
+            'name' => '木村　一颯',
             'email' => 'issa@example.com',
+            'password' => Hash::make('password'),
+            'email_verified_at' => Carbon::now(),
+            'role' => 0, //一般
+        ]);
+
+        User::create([
+            'name' => '山田　花子',
+            'email' => 'hanako@example.com',
             'password' => Hash::make('password'),
             'email_verified_at' => Carbon::now(),
             'role' => 0, //一般

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\AdminLoginRequest;
 
 class AdminLoginController extends Controller
 {
@@ -13,16 +15,32 @@ class AdminLoginController extends Controller
         return view('auth.admin_login');
     }
 
-    public function login(Request $request)
+    public function login(AdminLoginRequest $request)
     {
         $credentials = $request->only('email', 'password');
 
+        // if (Auth::guard('admin')->attempt($credentials)) {
+        //     $request->session()->regenerate();
+        //     return redirect('/admin/attendance/list');
+        // }
+
         if (Auth::guard('admin')->attempt($credentials)) {
+            $user = Auth::guard('admin')->user();
+
+            if ($user->role !== 1) {
+                Auth::logout();
+                return back()->withErrors([
+                    'email' => '管理者専用アカウントではありません。',
+                ])->withInput();
+            }
+
             $request->session()->regenerate();
-            return redirect('/admin/attendance/list');
+            return redirect()->route('admin.attendance.list');
         }
 
-        return back();
+        return back()->withErrors([
+            'email' => trans('auth.failed'),
+        ])->withInput();
     }
 
     public function logout(Request $request)

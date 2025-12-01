@@ -38,7 +38,7 @@ class Attendance extends Model
             self::STATUS_OFF_DUTY => '勤務外',
             self::STATUS_WORKING => '出勤中',
             self::STATUS_BREAK => '休憩中',
-            self::STATUS_FINISHED => '退勤済み',
+            self::STATUS_FINISHED => '退勤済',
             default => '不明',
         };
     }

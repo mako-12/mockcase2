@@ -24,7 +24,9 @@ class DatabaseSeeder extends Seeder
 
         //ダミーデータの記述
         // 一般ユーザーだけを対象にする（id:2〜3）
-        $users = User::where('role', 0)->get();
+        $users = User::where('role', 0)
+            ->whereBetween('id', [2, 4])
+            ->get();
 
         // 3ヶ月分（先月・今月・来月）
         $months = [

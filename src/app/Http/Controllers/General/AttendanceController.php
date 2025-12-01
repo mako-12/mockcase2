@@ -130,10 +130,6 @@ class AttendanceController extends Controller
 
     public function showDetail($id)
     {
-
-        // $attendance = Attendance::with('user', 'breakTimes', 'attendanceRequests')
-        //     ->findOrFail($id);
-
         $attendance = Attendance::with([
             'user',
             'breakTimes',
@@ -141,16 +137,9 @@ class AttendanceController extends Controller
         ])->findOrFail($id);
 
         if ($attendance->user_id !== auth()->id()) {
-
             Auth::logout(); //ログアウト(セッション削除)
             return redirect()->route('login')->with('error', 'アクセス権限がありません。再度ログインしてください。');
         }
-
-        //承認待ちの申請があるか確認。あれば入力欄を無効
-        // $pendingRequest = $attendance->attendanceRequests()
-        //     ->with('breakRequests')
-        //     ->where('status', AttendanceRequest::STATUS_PENDING)
-        //     ->first();
 
         $pendingRequest = $attendance->attendanceRequests
             ->where('status', AttendanceRequest::STATUS_PENDING)

@@ -1,9 +1,14 @@
 @extends('layouts.default')
-
 @section('title', '管理者用ログイン')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/authentication.css') }}">
+@endsection
+@section('body-class', 'login-page')
 
 @section('content')
+
+
 
     @include('components.header')
 
@@ -13,24 +18,33 @@
         </div>
     @endif
 
+    <div class="content">
+        <form action="/admin/login" method="post" class="inner">
+            @csrf
+            <h1 class="page__title">管理者ログイン</h1>
 
-    <form action="/admin/login" method="post" class="authenticate center">
-        @csrf
-        <hi class="page_title">管理者ログイン</hi>
-        <label for="mail" class="entry__name">メールアドレス</label>
-        <input type="email" name="email" id="mail" class="input" value="{{ old('email') }}">
-        <div class="form__error">
-            @error('email')
-                {{ $message }}
-            @enderror
-        </div>
-        <label for="password" class="entry__name">パスワード</label>
-        <input type="password" name="password" id="password">
-        <div class="form__error">
-            @error('password')
-                {{ $message }}
-            @enderror
-        </div>
-        <button class="btn btn--big">ログインする</button>
-    </form>
+            <div class="page__item">
+                <label for="mail" class="entry__name">メールアドレス</label>
+                <input type="email" name="email" id="email" class="input" value="{{ old('email') }}">
+                <div class="error-message">
+                    @error('email')
+                        {{ $message }}
+                    @enderror
+                </div>
+            </div>
+            <div class="page__item">
+                <label for="password" class="entry__name">パスワード</label>
+
+                <input type="password" name="password" id="password" class="input">
+                <div class="error-message">
+                    @error('password')
+                        {{ $message }}
+                    @enderror
+                </div>
+            </div>
+            <div class="page__item">
+                <button class="btn btn--big">管理者ログインする</button>
+            </div>
+        </form>
+    </div>
 @endsection

@@ -17,6 +17,18 @@ class RedirectIfAuthenticated
      * @param  string|null  ...$guards
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
+    //メール認証機能(未承認ユーザーをverifyにリダイレクト)
+    // Route::get('/email/verify', function () {
+    //     return view('auth.verify-email');
+    // )}
+
+    // Route::get('/email/verify', function(){
+    //     return view('auth.verify-email');
+    // })
+    // ->middleware('auth')
+    // ->name('verification.notice');
+
+
     public function handle(Request $request, Closure $next, ...$guards)
     {
         $guards = empty($guards) ? [null] : $guards;

@@ -21,3 +21,4 @@ class AttendanceRequestController extends Controller
         return view('general.request_list', compact('attendanceRequests'));
     }
 }
+

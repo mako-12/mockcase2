@@ -99,10 +99,11 @@ Route::post('/email/verification-notification', function (Request $request) {
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 //承認リンクをクリックしたら承認されるように
-// Route::get('/email/check', function () {
-//     return redirect()->away('http://localhost:8025/#');
-// })->middleware('auth')->name('verification.check');
-
 Route::get('/email/check', function () {
     return redirect()->away('http://localhost:8025/#');
-})->name('verification.check');
+})->middleware('auth')->name('verification.check');
+
+// Route::get('/email/check', function () {
+//     return redirect()->away('http://localhost:8025/#');
+// })->name('verification.check');
+ 

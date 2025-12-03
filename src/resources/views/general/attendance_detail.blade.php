@@ -7,7 +7,10 @@
 @endsection
 
 @section('content')
-    @include('components.header')
+
+        @include('components.header')
+
+
     <div class="content">
         <div class="inner">
             <div class="page__header">

@@ -7,7 +7,6 @@ use App\Models\User;
 use Carbon\CarbonPeriod;
 use App\Models\BreakTime;
 use App\Models\Attendance;
-use App\Models\BreakRequest;
 use Illuminate\Http\Request;
 use App\Models\AttendanceRequest;
 use Illuminate\Support\Facades\DB;
@@ -56,8 +55,6 @@ class AttendanceController extends Controller
 
         $attendanceDate = Attendance::with(['breakTimes'])
             ->where('user_id', $id)
-            // ->whereMonth('work_date', Carbon::parse($month)->month)
-            // ->whereYear('work_date', Carbon::parse($month)->year)
             ->whereBetween('work_date', [$startOfMonth, $endOfMonth])
             ->get()
             ->keyBy(function ($item) {
@@ -160,8 +157,6 @@ class AttendanceController extends Controller
             }
             // 送信されなかった既存の休憩を削除
             // 例）休憩が３つあったのに、２つしか送信されなかった場合、３つ目の余りを削除
-
-
             $submittedBreaksCount = !empty($validated['break_start'])
                 ? count(array_filter($validated['break_start']))
                 : 0;

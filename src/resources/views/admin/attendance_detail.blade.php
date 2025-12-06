@@ -120,34 +120,6 @@
                                             value="{{ $newBreak->requested_break_end ? $newBreak->requested_break_end->format('H:i') : '' }} "
                                             {{ $pendingRequest ? 'disabled' : '' }}>
 
-                                        {{-- @if ($breakTime->break_start && $breakTime->break_end && $index >= 1)
-                                        @if (!empty(old("break_end . $index")))
-                                            <div class="error-message">
-                                                @error("break_end.$index")
-                                                    <p>{{ $message }}</p>
-                                                @enderror
-
-                                                @error("break_start.$index")
-                                                    <p>{{ $message }}</p>
-                                                @enderror
-                                            </div>
-                                        @endif
-                                    @endif --}}
-
-                                        {{-- 第二候補 --}}
-                                        {{-- @if ($breakTime->break_start && $breakTime->break_end && $index > 0)
-                                        <div class="error-message">
-                                            @error("break_end.$index")
-                                                <p>{{ $message }}</p>
-                                            @enderror
-
-                                            @error("break_start.$index")
-                                                <p>{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                    @endif --}}
-
-                                        {{-- 第三候補 --}}
                                         @if ($breakTime->break_start && $breakTime->break_end && $index > 0)
                                             <div class="error-message">
                                                 @error("break_end . count($attendance->breakTimes)")

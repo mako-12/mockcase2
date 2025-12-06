@@ -35,14 +35,4 @@ class EmailVerificationController extends Controller
         }
         return redirect()->route('general.attendance')->with('message', 'メール認証が完了しました！');
     }
-
-    //確認用メール送信画面
-    public function index() {}
-
-
-    //確認メール送信
-    public function notification() {}
-
-    //メールリンクの検証
-    public function verification() {}
 }

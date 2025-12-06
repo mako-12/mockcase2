@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -19,10 +18,6 @@ class AdminLoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        // if (Auth::guard('admin')->attempt($credentials)) {
-        //     $request->session()->regenerate();
-        //     return redirect('/admin/attendance/list');
-        // }
 
         if (Auth::guard('admin')->attempt($credentials)) {
             $user = Auth::guard('admin')->user();

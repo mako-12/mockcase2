@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CsvDownloadController;
 use App\Http\Controllers\Auth\AdminLoginController;
@@ -52,17 +50,9 @@ Route::prefix('admin')->middleware(['auth:admin', 'can:isAdmin'])->group(functio
 });
 
 
-
-// 一般ユーザー
-// Route::prefix('general')->middleware(['auth'])->group(function () {
-//     Route::get('/attendance', [GeneralAttendanceController::class, 'index'])->name('general.attendance');
-// });
-
 //一般ユーザーページ
 Route::middleware(['auth', 'verified'])->group(function () {
-    // Route::get('/dashboard', function () {
-    //     return view('dashboard');
-    // });
+
     Route::get('/attendance', [GeneralAttendanceController::class, 'index'])->name('general.attendance');
     Route::post('/attendance', [GeneralAttendanceController::class, 'updateStatus'])->name('attendance.update');
     Route::get('/attendance/list', [GeneralAttendanceController::class, 'showList'])->name('attendance.list');
@@ -73,14 +63,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //申請一覧画面
     Route::get('/stamp_correction_request/list', [GeneralAttendanceRequestController::class, 'index'])->name('general.attendance.request');
-
-
-    // Route::get('/test-mail', function () {
-    // Mail::raw('これはテストメールです', function ($message) {
-    //     $message->to('test@example.com')->subject('テスト送信');
-    // });
-    // return 'メールを送信しました';
 });
+
 
 
 //メール認証機能(未承認ユーザーをverifyにリダイレクト)
@@ -102,8 +86,3 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::get('/email/check', function () {
     return redirect()->away('http://localhost:8025/#');
 })->middleware('auth')->name('verification.check');
-
-// Route::get('/email/check', function () {
-//     return redirect()->away('http://localhost:8025/#');
-// })->name('verification.check');
- 

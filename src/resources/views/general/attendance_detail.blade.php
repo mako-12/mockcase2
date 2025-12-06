@@ -8,7 +8,7 @@
 
 @section('content')
 
-        @include('components.header')
+    @include('components.header')
 
 
     <div class="content">
@@ -16,27 +16,6 @@
             <div class="page__header">
                 <h2>勤怠詳細</h2>
             </div>
-
-
-            {{-- @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    @if (session('error'))
-        <div class="alert alert-error">{{ session('error') }}</div>
-    @endif
-
-    @if ($errors->any())
-        <div class="alert alert-error">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif --}}
-
-
 
             <form action="{{ route('attendance.request.submit', $attendance->id) }}" method="post">
                 @csrf
@@ -131,7 +110,6 @@
                     @endforeach
 
                     {{-- 新規追加用の休憩(承認待ちでない場合のみに表示) --}}
-                    {{-- @if (!$pendingRequest) --}}
                     @php
                         //承認待ちのbreak_time_idがnullの申請(新規追加の休憩)を取得
                         $newBreaks = $pendingRequest
@@ -156,18 +134,6 @@
                                         value="{{ $newBreak->requested_break_end ? $newBreak->requested_break_end->format('H:i') : '' }}"
                                         {{ $pendingRequest ? 'disabled' : '' }}>
 
-                                    {{-- @if ($breakTime->break_start && $breakTime->break_end && $index > 0)
-                                        <div class="error-message">
-                                            @error("break_end . count($attendance->breakTimes)")
-                                                <p>{{ $message }}</p>
-                                            @enderror
-
-                                            @error("break_start. count($attendance->breakTimes)")
-                                                <p>{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                    @endif --}}
-
                                     @if ($newBreak->requested_break_start && $newBreak->requested_break_end && $index > 0)
                                         <div class="error-message">
                                             @error("break_end.$index")
@@ -186,29 +152,6 @@
                     @endif
 
                     {{-- 空の追加欄 --}}
-                    {{-- @if (!$pendingRequest)
-                        <tr class="detail__row">
-                            <th class="detail__label">休憩{{ count($attendance->breakTimes) + count($newBreaks) + 1 }}</th>
-                            <td class="detail__data">
-                                <input type="time" class="detail__input" name="break_start[]">
-                                <span class="detail__separator">～</span>
-                                <input type="time" class="detail__input" name="break_end[]">
-                                @if (!empty(old("break_end.$index")))
-                                    <div class="error-message">
-                                        @error("break_end.$index")
-                                            <p>{{ $message }}</p>
-                                        @enderror
-                                        </br>
-                                        @error("break_start.$index")
-                                            <p>{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                @endif
-                            </td>
-                        </tr>
-                    @endif --}}
-
-
                     @if (!$pendingRequest)
                         <tr class="detail__row">
                             <th class="detail__label">休憩{{ count($attendance->breakTimes) + count($newBreaks) + 1 }}</th>

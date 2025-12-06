@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\BreakTime;
-use App\Models\Attendance;
-use Illuminate\Http\Request;
 use App\Models\AttendanceRequest;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AttendanceRequestFormRequest;
 
 class AttendanceRequestController extends Controller
 {
@@ -54,9 +51,6 @@ class AttendanceRequestController extends Controller
 
 
             // 休憩時間を更新
-
-            // $firstBreakRequest = $attendanceRequest->breakRequest->first();
-
             foreach ($attendanceRequest->breakRequests as $breakRequest) {
                 if ($breakRequest->break_time_id) {
                     // 既存の休憩を更新

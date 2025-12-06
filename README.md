@@ -3,9 +3,9 @@ coachtech 勤怠管理アプリ
 
 # 環境構築
 ### Dockerビルド
-1.git clone git@github.com:mako-12/mockcase2.git
-2.DockerDesktopアプリを立ち上げる
-3.docker-compose up -d --build
+1. git clone git@github.com:mako-12/mockcase2.git
+2. DockerDesktopアプリを立ち上げる
+3. docker-compose up -d --build
 
 ### Laravel環境構築
 1. docker-compose exec php bash
@@ -98,21 +98,21 @@ DB_PASSWORD=laravel_pass
 <img width="782" height="552" alt="模擬案件２ER図 (3)" src="https://github.com/user-attachments/assets/1f31fb2d-3eb3-496b-aabe-32853e86924a" />
 
 ## テストアカウント
-name: 管理者
-email: admin@example.com
-password: password
+name: 管理者  
+email: admin@example.com  
+password: password  
 -------------------------
-name: 田中　一郎
-email: itiro@example.com
-password: password
+name: 田中　一郎  
+email: itiro@example.com  
+password: password  
 -------------------------
-name: 佐藤　一花
-email: ichika@example.com
-password: password
+name: 佐藤　一花  
+email: ichika@example.com  
+password: password  
 -------------------------
-name: 木村　一颯
-email:issa@example.com
-password: password
+name: 木村　一颯  
+email:issa@example.com  
+password: password  
 -------------------------
 
 ## PHPUnitを利用したテストに関して

@@ -4,10 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\User;
-use Database\Seeders\DatabaseSeeder;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class RegisterTest extends TestCase
 {
@@ -108,7 +105,7 @@ class RegisterTest extends TestCase
             'email' => "test@gmail.com",
             'password' => "password",
             'password_confirmation' => "password",
-            // 'email_verified_at' => null,
+            'email_verified_at' => null,
         ]);
 
         // $response->assertRedirect('/email/verify');

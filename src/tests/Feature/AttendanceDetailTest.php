@@ -6,7 +6,6 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\AttendanceRequest;
 use Database\Seeders\DatabaseSeeder;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AttendanceDetailTest extends TestCase
@@ -62,10 +61,6 @@ class AttendanceDetailTest extends TestCase
         ]);
 
         $this->actingAs($user)->get('/attendance/list');
-
-        // $attendance = \App\Models\Attendance::where('user_id', $user->id)
-        //     ->whereDate('work_date', '2025-11-01')
-        //     ->first();
 
         $response = $this->actingAs($user)
             ->get(route('attendance.detail', ['id' => $attendance->id]));
@@ -252,7 +247,6 @@ class AttendanceDetailTest extends TestCase
         );
 
         $response->assertStatus(302);
-        // $response->assertRedirect(route('attendance.detail', ['id' => $attendance->id]));
         $response->assertSessionHasErrors(['break_start.0' => '休憩時間は不適切な値です',]);
     }
 

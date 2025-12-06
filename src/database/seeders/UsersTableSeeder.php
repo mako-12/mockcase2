@@ -51,13 +51,5 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => Carbon::now(),
             'role' => 0, //一般
         ]);
-
-        User::create([
-            'name' => '山田　花子',
-            'email' => 'hanako@example.com',
-            'password' => Hash::make('password'),
-            'email_verified_at' => Carbon::now(),
-            'role' => 0, //一般
-        ]);
     }
 }

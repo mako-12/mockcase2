@@ -66,12 +66,6 @@ class AttendanceRequestFormRequest extends FormRequest
                 }
             }
 
-            // 出勤・退勤の片方だけ入力されている場合
-            // if (($startTime && !$endTime) || (!$startTime && $endTime)) {
-            //     $validator->errors()->add('start_time', '出勤時刻と退勤時刻は両方入力してください。');
-            // }
-
-
             // ルール2: 休憩時間が退勤時間より後になっている場合
             //休憩開始時刻は退勤時刻よりも後ならエラー
             if ($endTime && $startTime) {
@@ -99,65 +93,11 @@ class AttendanceRequestFormRequest extends FormRequest
                     $breakEndTime = Carbon::createFromFormat('H:i', $breakEnd);
                     $endTimeCarbon = Carbon::createFromFormat('H:i', $endTime);
 
-                    // $breakEndTime = Carbon::createFromFormat('H:i', $breakEnds[$index]);
-
                     if ($breakEndTime->greaterThanOrEqualTo($endTimeCarbon)) {
                         $validator->errors()->add("break_end.$index", "休憩時間もしくは退勤時間が不適切な値です");
                     }
                 }
             }
-
-            //休憩開始時刻は出勤時刻よりも前ならエラー
-            // if ($startTime) {
-            //     $startTimeCarbon = Carbon::createFromFormat('H:i', $startTime);
-
-            //     foreach ($breakStarts as $index => $breakStart) {
-            //         if (!empty($breakStart)) {
-            //             $breakStartTime = Carbon::createFromFormat('H:i', $breakStart);
-            //             if ($breakStartTime->lessThan($startTimeCarbon)) {
-            //                 $validator->errors()->add("break_start.{$index}", "休憩時間が不適切です1");
-            //             }
-            //         }
-            //     }
-            // }
-
-
-            // ルール3: 休憩開始時刻が休憩終了時刻より後になっている場合
-
-            // foreach ($breakStarts as $index => $breakStart) {
-            //     if ($breakStart && isset($breakEnds[$index]) && $breakEnds[$index]) {
-            //         $breakEndTime = Carbon::createFromFormat('H:i', $breakEnds[$index]);
-
-            //         if ($breakEndTime->greaterThanOrEqualTo($endTime)) {
-            //             $validator->errors()->add('break_end', '休憩時間もしくは退勤時間が不適切な値です');
-            //         }
-            //     }
-            // }
-
-
-
-
-            // // 休憩のペアチェック(開始だけ、または終了だけの入力を防ぐ)
-            // foreach ($breakStarts as $index => $breakStart) {
-            //     if ($breakStart && empty($breakEnds[$index])) {
-            //         $validator->errors()->add("break_end.{$index}", "休憩" . ($index + 1) . "の終了時刻を入力してください。");
-            //     }
-            // }
-            // foreach ($breakEnds as $index => $breakEnd) {
-            //     if ($breakEnd && empty($breakStarts[$index])) {
-            //         $validator->errors()->add("break_start.{$index}", "休憩" . ($index + 1) . "の開始時刻を入力してください。");
-            //     }
-            // }
-
-
-
-            // 出勤・退勤も休憩も入力されていない場合
-            // $hasStartEnd = $startTime  && $endTime;
-            // $hasBreak = !empty(array_filter($breakStarts)) && !empty(array_filter($breakEnds));
-
-            // if (!$hasStartEnd && !$hasBreak) {
-            //     $validator->errors()->add('start_time', '出勤・退勤時刻、または休憩時間のいずれかを入力してください。');
-            // }
         });
     }
 }

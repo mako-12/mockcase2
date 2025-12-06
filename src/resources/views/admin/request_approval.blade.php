@@ -66,14 +66,6 @@
                             </td>
                         </tr>
                     @endforeach
-                    {{-- <tr class="detail__row">
-            <th class="detail__label">休憩{{ count($attendanceRequest->breakRequests) + 1 }}</th>
-            <td class="detail__data">
-                <input type="time" name="requested_start_time[]" disabled>
-                <span class="separator">～</span>
-                <input type="time" name="requested_end_time[]" disabled>
-            </td>
-        </tr> --}}
 
                     <tr class="detail__row">
                         <th class="detail__label">備考</th>

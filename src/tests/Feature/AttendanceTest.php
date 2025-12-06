@@ -6,8 +6,6 @@ use Carbon\Carbon;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AttendanceTest extends TestCase
